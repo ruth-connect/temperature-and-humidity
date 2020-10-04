@@ -84,7 +84,10 @@ public class TemperatureAndHumidityServiceImpl implements TemperatureAndHumidity
 						}
 					}
 				}
-				temperatureAndHumidity = temperatureAndHumidityBean;
+				if (temperatureAndHumidity == null || (temperatureAndHumidityBean.getTemperature() != null
+						&& temperatureAndHumidityBean.getHumidity() != null)) {
+					temperatureAndHumidity = temperatureAndHumidityBean;
+				}
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException ex) {
