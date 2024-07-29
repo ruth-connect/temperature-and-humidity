@@ -69,8 +69,14 @@ public class TemperatureAndHumidityServiceImpl implements TemperatureAndHumidity
 									line.indexOf("Temperature = ") + "Temperature = ".length(), line.indexOf("*") - 1);
 							logger.debug("Humidity: <" + humidity + ">");
 							logger.debug("Temperature: <" + temperature + ">");
-							temperatureAndHumidityBean.setHumidity(new BigDecimal(humidity));
-							temperatureAndHumidityBean.setTemperature(new BigDecimal(temperature));
+							temperatureAndHumidityBean
+									.setHumidity((Double.valueOf(humidity) >= 0d && Double.valueOf(humidity) <= 100d)
+											? new BigDecimal(humidity)
+											: null);
+							temperatureAndHumidityBean.setTemperature(
+									(Double.valueOf(temperature) >= -40d && Double.valueOf(temperature) <= 100d)
+											? new BigDecimal(temperature)
+											: null);
 						}
 					} while (line != null);
 				} catch (Exception ex) {
